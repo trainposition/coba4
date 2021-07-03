@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Posisi Kereta</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" rel="stylesheet" type="text/css" />    
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />   
+    <link href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />    
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" /> 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.0/leaflet.awesome-markers.css" rel="stylesheet" type="text/css" />
+    <link href="example_2.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="dist/L.Control.Heightgraph.css"/>
+	<link rel="stylesheet" href="dist/leaflet-search.css" />
+	<link rel="stylesheet" href="dist/MarkerCluster.css" />
+	<link rel="stylesheet" href="dist/MarkerCluster.Default.css" />
+	<link rel="stylesheet" href="dist/leaflet-sidebar.css" />
+	<link rel="stylesheet" href="dist/easy-button.css" />
+	<link rel="stylesheet" href="dist/leaflet.zoomhome.css" media="screen">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Girassol&family=Roboto&display=swap" rel="stylesheet">
+    <style>
+    .datetimeControl p {
+        margin: 0;
+        font-size: 16px;
+    }
+	
+	#hidethis, #hidethis1, #hidethis2, #hidethis3, #hidethis4, #hidethis5, #hidethis6, #hidethis7, #hidethis8, #hidethis9, #hidethis10, #hidethis11, #hidethis12, #hidethis13 {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 15px;
+}
+
+#hidethis td, #hidethis th, #hidethis1 td, #hidethis1 th, #hidethis2 td, #hidethis2 th, #hidethis3 td, #hidethis3 th, #hidethis4 td, #hidethis4 th, #hidethis5 td, #hidethis5 th, #hidethis6 td, #hidethis6 th, #hidethis7 td, #hidethis7 th, #hidethis8 td, #hidethis8 th, #hidethis9 td, #hidethis9 th, #hidethis10 td, #hidethis10 th, #hidethis11 td, #hidethis11 th, #hidethis12 td, #hidethis12 th, #hidethis13 td, #hidethis13 th {
+  border: 1px solid #ddd;
+  padding: 4px;
+  text-align: center;
+}
+
+#hidethis tr:nth-child(even), #hidethis1 tr:nth-child(even), #hidethis2 tr:nth-child(even), #hidethis3 tr:nth-child(even), #hidethis4 tr:nth-child(even), #hidethis5 tr:nth-child(even), #hidethis6 tr:nth-child(even), #hidethis7 tr:nth-child(even), #hidethis8 tr:nth-child(even), #hidethis9 tr:nth-child(even), #hidethis10 tr:nth-child(even), #hidethis11 tr:nth-child(even), #hidethis12 tr:nth-child(even), #hidethis13 tr:nth-child(even) {background-color: #c5c5c5;}
+
+#hidethis th, #hidethis1 th, #hidethis2 th, #hidethis3 th, #hidethis4 th, #hidethis5 th, #hidethis6 th, #hidethis7 th, #hidethis8 th, #hidethis9 th, #hidethis10 th, #hidethis11 th, #hidethis12 th, #hidethis13 th {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  text-align: center;
+  background-color: #4CAF50;
+  color: white;
+}
+	
+	.popover{
+    max-width: 100%; /* Max Width of the popover (depending on the container!) */
+}
+    </style>
+</head>
+<script>
+  function toggle() {
+   if( document.getElementById("hidethis").style.display=='none' ){
+     document.getElementById("hidethis").style.display = 'table-row'; // set to table-row instead of an empty string
+   }else{
+     document.getElementById("hidethis").style.display = 'none';
+   }
+  }
+  function toggle1() {
+   if( document.getElementById("hidethis1").style.display=='none' ){
+     document.getElementById("hidethis1").style.display = 'table-row'; // set to table-row instead of an empty string
+   }else{
+     document.getElementById("hidethis1").style.display = 'none';
+   }
+  }
+  function toggle2() {
+   if( document.getElementById("hidethis2").style.display=='none' ){
+     document.getElementById("hidethis2").style.display = 'table-row'; // set to table-row instead of an empty string
+   }else{
+     document.getElementById("hidethis2").style.display = 'none';
+   }
+  }
+  function toggle3() {
+   if( document.getElementById("hidethis3").style.display=='none' ){
+     document.getElementById("hidethis3").style.display = 'table-row'; // set to table-row instead of an empty string
+   }else{
+     document.getElementById("hidethis3").style.display = 'none';
+   }
+  }
+  function toggle4() {
+   if( document.getElementById("hidethis4").style.display=='none' ){
+     document.getElementById("hidethis4").style.display = 'table-row'; // set to table-row instead of an empty string
+   }else{
+     document.getElementById("hidethis4").style.display = 'none';
+   }
+  }
+  function toggle5() {
+   if( document.getElementById("hidethis5").style.display=='none' ){
+     document.getElementById("hidethis5").style.display = 'table-row'; // set to table-row instead of an empty string
+   }else{
+     document.getElementById("hidethis5").style.display = 'none';
+   }
+  }
+  function toggle6() {
+   if( document.getElementById("hidethis6").style.display=='none' ){
+     document.getElementById("hidethis6").style.display = 'table-row'; // set to table-row instead of an empty string
+   }else{
+     document.getElementById("hidethis6").style.display = 'none';
+   }
+  }
+  function toggle7() {
+   if( document.getElementById("hidethis7").style.display=='none' ){
+     document.getElementById("hidethis7").style.display = 'table-row'; // set to table-row instead of an empty string
+   }else{
+     document.getElementById("hidethis7").style.display = 'none';
+   }
+  }
+  function toggle8() {
+   if( document.getElementById("hidethis8").style.display=='none' ){
+     document.getElementById("hidethis8").style.display = 'table-row'; // set to table-row instead of an empty string
+   }else{
+     document.getElementById("hidethis8").style.display = 'none';
+   }
+  }
+  function toggle9() {
+   if( document.getElementById("hidethis9").style.display=='none' ){
+     document.getElementById("hidethis9").style.display = 'table-row'; // set to table-row instead of an empty string
+   }else{
+     document.getElementById("hidethis9").style.display = 'none';
+   }
+  }
+  function toggle10() {
+   if( document.getElementById("hidethis10").style.display=='none' ){
+     document.getElementById("hidethis10").style.display = 'table-row'; // set to table-row instead of an empty string
+   }else{
+     document.getElementById("hidethis10").style.display = 'none';
+   }
+  }
+  function toggle11() {
+   if( document.getElementById("hidethis11").style.display=='none' ){
+     document.getElementById("hidethis11").style.display = 'table-row'; // set to table-row instead of an empty string
+   }else{
+     document.getElementById("hidethis11").style.display = 'none';
+   }
+  }
+  function toggle12() {
+   if( document.getElementById("hidethis12").style.display=='none' ){
+     document.getElementById("hidethis12").style.display = 'table-row'; // set to table-row instead of an empty string
+   }else{
+     document.getElementById("hidethis12").style.display = 'none';
+   }
+  }
+  function toggle13() {
+   if( document.getElementById("hidethis13").style.display=='none' ){
+     document.getElementById("hidethis13").style.display = 'table-row'; // set to table-row instead of an empty string
+   }else{
+     document.getElementById("hidethis13").style.display = 'none';
+   }
+  }
+</script>
+<body>
+
+    <div id="sidebar" class="leaflet-sidebar collapsed">
+        <!-- Nav tabs -->
+	<nav>
+        <div class="leaflet-sidebar-tabs">
+          <ul role="tablist">
+            <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+			<li><a href="#jadwal" role="tab"><i class="fa fa-train"></i></a></li>
+            <li><a href="#tweets" role="tab"><i class="fa fa-twitter"></i></a></li>
+			<li><a href="#legend" role="tab"><i class="fa fa-map-signs"></i></a></li>
+          </ul>
+		  <ul role="tablist">
+                <li><a href="index.html"><i class="fa fa-home" style="font-size:20px"></i></a></li>
+				<li><a href="peta.html"><i class="fa fa-map-o" style="font-size:20px"></i></a></li>
+				<li><a href="index.html#tabs2-8"><i class="fa fa-pencil-square-o" style="font-size:20px"></i></a></li>
+				<li><a href="index.html#footer2-3"><i class="fa fa-address-book" style="font-size:1px"></i></a></li>
+            </ul>
+        </div>
+        <!-- Tab panes -->
+        <div class="leaflet-sidebar-content">
+          <div class="leaflet-sidebar-pane" id="home">
+            <h1 class="leaflet-sidebar-header">
+              Layers
+              <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+            </h1>
+            <span id="layercontrol"></span>
+          </div>
+		  
+          <div class="leaflet-sidebar-pane" id="jadwal">
+            <h1 class="leaflet-sidebar-header">
+              Jadwal Kereta (GAPEKA 2019)
+              <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+            </h1>						
+            <h6>Pencarian jadwal berdasarkan kereta</h6> 
+					<h4 style="text-align:center">Yogyakarta - Jakarta</h4>
+          <span class="btn btn-primary btn-sm" onClick="toggle2();">KA Taksaka Pagi (83) <i class="fa fa-caret-down"></i></span>
+            <br>
+            <table border="2" id="hidethis2" style="display:none;">
+            <tr>
+              <th>No.</th>
+              <th>Nama Stasiun</th>
+              <th>Tiba</th>
+              <th>Berangkat</th>
+              <th>Zoom</th>
+            </tr>
+            <tr>
+              <td>1</td>	<td>Yogyakarta </td>	<td>-</td>	<td>09.00</td>
+            <td id= "zoomke1"></td>
+            </tr>
+            <tr>
+              <td>2</td>	<td>Kutoarjo</td>	<td>09.52</td>	<td>09.55</td>
+              <td id= "zoomke2"></td>
+            </tr>
+            <tr>
+              <td>3</td>	<td>Kebumen </td>	<td>10.21</td>	<td>10.23</td>
+              <td id= "zoomke3"></td>
+            </tr>
+            <tr>
+              <td>4</td>	<td>Kroya</td>	<td>11.07</td>	<td>11.10</td>
+              <td id= "zoomke4"></td>
+            </tr>
+            <tr>
+              <td>5</td>	<td>Purwokerto</td>	<td>11.37</td>	<td>11.45</td>
+              <td id= "zoomke5"></td>
+            </tr>
+            <tr>
+              <td>6</td>	<td>Cirebon</td>	<td>13.37</td>	<td>13.44</td>
+              <td id= "zoomke6"></td>
+            </tr>
+            <tr>
+              <td>7</td>	<td>Jatinegara</td>	<td>16.24</td>	<td>16.27</td>
+              <td id= "zoomke7"></td>
+            </tr>
+            <tr>
+              <td>8</td>	<td>Gambir </td>	<td>16.42</td>	<td>-</td>
+              <td id= "zoomke8"></td>
+            </tr>
+            </table>
+
+            <span class="btn btn-primary btn-sm" onClick="toggle3();">KA Taksaka Malam (85) <i class="fa fa-caret-down"></i></span>
+            <br>
+            <table border="2" id="hidethis3" style="display:none;">
+              <tr>
+                <th>No.</th>
+                <th>Nama Stasiun</th>
+                <th>Tiba</th>
+                <th>Berangkat</th>
+                <th>Zoom</th>
+              </tr>
+            <tr>
+              <td>1</td>	<td>Yogyakarta </td>	<td>-</td>	<td>21.00</td>
+            <td id= "zoomke9"></td>
+            </tr>
+            <tr>
+              <td>2</td>	<td>Kutoarjo</td>	<td>21.52</td>	<td>21.55</td>
+              <td id= "zoomke10"></td>
+            </tr>
+            <tr>
+              <td>3</td>	<td>Kebumen </td>	<td>22.20</td>	<td>22.23</td>
+              <td id= "zoomke11"></td>
+            </tr>
+            <tr>
+              <td>4</td>	<td>Kroya</td>	<td>23.07</td>	<td>23.10</td>
+              <td id= "zoomke12"></td>
+            </tr>
+            <tr>
+              <td>5</td>	<td>Purwokerto</td>	<td>23.36</td>	<td>23.43</td>
+              <td id= "zoomke13"></td>
+            </tr>
+            <tr>
+              <td>6</td>	<td>Cirebon</td>	<td>01.37</td>	<td>01.44</td>
+              <td id= "zoomke14"></td>
+            </tr>
+            <tr>
+              <td>7</td>	<td>Bekasi</td>	<td>04.08</td>	<td>04.10</td>
+              <td id= "zoomke15"></td>
+            </tr>
+            <tr>
+              <td>8</td>	<td>Jatinegara</td>	<td>04.27</td>	<td>04.29</td>
+              <td id= "zoomke16"></td>
+            </tr>
+            <tr>
+              <td>9</td>	<td>Gambir </td>	<td>04.45</td>	<td>-</td>
+              <td id= "zoomke17"></td>
+            </tr>
+            </table>
+          <span class="btn btn-primary btn-sm" onClick="toggle4();">KA Bogowonto (141) <i class="fa fa-caret-down"></i></span>
+            <br>
+            <table border="2" id="hidethis4" style="display:none;">
+              <tr>
+                <th>No.</th>
+                <th>Nama Stasiun</th>
+                <th>Tiba</th>
+                <th>Berangkat</th>
+                <th>Zoom</th>
+              </tr>
+            <tr>
+              <td>1</td>	<td>Lempuyangan</td>	<td>-</td>	<td>09.45</td>
+            <td id= "zoomke18"></td>
+            </tr>
+            <tr>
+              <td>2</td>	<td>Yogyakarta </td>	<td>09.49</td>	<td>09.54</td>
+            <td id= "zoomke19"></td>
+            </tr>
+            <tr>
+              <td>3</td>	<td>Wates</td>	<td>10.21</td>	<td>10.23</td>
+            <td id= "zoomke20"></td>
+            </tr>
+            <tr>
+              <td>4</td>	<td>Jenar</td>	<td>10.42</td>	<td>10.44</td>
+            <td id= "zoomke21"></td>
+            </tr>
+            <tr>
+              <td>5</td>	<td>Kutoarjo</td>	<td>10.57</td>	<td>11.00</td>
+            <td id= "zoomke22"></td>
+            </tr>
+            <tr>
+              <td>6</td>	<td>Karanganyar</td>	<td>11.36</td>	<td>11.42</td>
+            <td id= "zoomke23"></td>
+            </tr>
+            <tr>
+              <td>7</td>	<td>Gombong</td>	<td>11.50</td>	<td>11.56</td>
+            <td id= "zoomke24"></td>
+            </tr>
+            <tr>
+              <td>8</td>	<td>Kroya</td>	<td>12.21</td>	<td>12.31</td>
+            <td id= "zoomke25"></td>
+            </tr>
+            <tr>
+              <td>9</td>	<td>Purwokerto</td>	<td>12.57</td>	<td>13.15</td>
+            <td id= "zoomke26"></td>
+            </tr>
+            <tr>
+              <td>10</td>	<td>Ciledug</td>	<td>14.46</td>	<td>14.48</td>
+            <td id= "zoomke27"></td>
+            </tr>
+            <tr>
+              <td>11</td>	<td>Cirebon Prujakan </td>	<td>15.14</td>	<td>15.22</td>
+            <td id= "zoomke28"></td>
+            </tr>
+            <tr>
+              <td>12</td>	<td>Haurgeulis</td>	<td>16.25</td>	<td>16.27</td>
+            <td id= "zoomke29"></td>
+            </tr>
+            <tr>
+              <td>13</td>	<td>Jatinegara</td>	<td>18.12</td>	<td>18.14</td>
+            <td id= "zoomke30"></td>
+            </tr>
+            <tr>
+              <td>14</td>	<td>Pasar Senen</td>	<td>18.24</td>	<td>-</td>
+            <td id= "zoomke31"></td>
+            </tr>
+            
+            </table>
+
+            <span class="btn btn-primary btn-sm" onClick="toggle5();">KA Gajahwong (143) <i class="fa fa-caret-down"></i></span>
+            <br>
+            <table border="2" id="hidethis5" style="display:none;">
+              <tr>
+                <th>No.</th>
+                <th>Nama Stasiun</th>
+                <th>Tiba</th>
+                <th>Berangkat</th>
+                <th>Zoom</th>
+              </tr>
+            <tr>
+              <td>1</td>	<td>Lempuyangan</td>	<td>-</td>	<td>18.10</td>
+              <td id= "zoomke32"></td>
+            </tr>
+            <tr>
+              <td>2</td>	<td>Yogyakarta </td>	<td>18.14</td>	<td>18.17</td>
+              <td id= "zoomke33"></td>
+            </tr>
+            <tr>
+              <td>3</td>	<td>Wates</td>	<td>18.43</td>	<td>18.45</td>
+              <td id= "zoomke34"></td>
+            </tr>
+            <tr>
+              <td>4</td>	<td>Kutoarjo</td>	<td>19.13</td>	<td>19.16</td>
+              <td id= "zoomke35"></td>
+            </tr>
+            <tr>
+              <td>5</td>	<td>Prembun</td>	<td>19.28</td>	<td>19.34</td>
+              <td id= "zoomke36"></td>
+            </tr>
+            <tr>
+              <td>6</td>	<td>Kebumen </td>	<td>19.48</td>	<td>19.52</td>
+              <td id= "zoomke37"></td>
+            </tr>
+            <tr>
+              <td>7</td>	<td>Gombong</td>	<td>20.10</td>	<td>20.12</td>
+              <td id= "zoomke38"></td>
+            </tr>
+            <tr>
+              <td>8</td>	<td>Purwokerto</td>	<td>21.03</td>	<td>21.12</td>
+              <td id= "zoomke39"></td>
+            </tr>
+            <tr>
+              <td>9</td>	<td>Bumiayu</td>	<td>21.54</td>	<td>21.56</td>
+              <td id= "zoomke40"></td>
+            </tr>
+            <tr>
+              <td>10</td>	<td>Ciledug</td>	<td>22.46</td>	<td>22.48</td>
+              <td id= "zoomke41"></td>
+            </tr>
+            <tr>
+              <td>11</td>	<td>Cirebon</td>	<td>23.16</td>	<td>23.25</td>
+              <td id= "zoomke42"></td>
+            </tr>
+            <tr>
+              <td>12</td>	<td>Bekasi</td>	<td>01.55</td>	<td>01.57</td>
+              <td id= "zoomke43"></td>
+            </tr>
+            <tr>
+              <td>13</td>	<td>Jatinegara</td>	<td>02.17</td>	<td>02.19</td>
+              <td id= "zoomke44"></td>
+            </tr>
+            <tr>
+              <td>14</td>	<td>Pasar Senen</td>	<td>02.29</td>	<td>-</td>
+              <td id= "zoomke45"></td>
+            </tr>
+            </table>
+          <span class="btn btn-primary btn-sm" onClick="toggle6();">KA Fajar Utama YK (145) <i class="fa fa-caret-down"></i></span>
+            <br>
+            <table border="2" id="hidethis6" style="display:none;">
+              <tr>
+                <th>No.</th>
+                <th>Nama Stasiun</th>
+                <th>Tiba</th>
+                <th>Berangkat</th>
+                <th>Zoom</th>
+              </tr>
+            <tr>
+              <td>1</td>	<td>Yogyakarta </td>	<td>-</td>	<td>07.00</td>
+              <td id= "zoomke46"></td>
+            </tr>
+            <tr>
+              <td>2</td>	<td>Wates</td>	<td>07.26</td>	<td>07.28</td>
+              <td id= "zoomke47"></td>
+            </tr>
+            <tr>
+              <td>3</td>	<td>Kutoarjo</td>	<td>07.57</td>	<td>08.02</td>
+              <td id= "zoomke48"></td>
+            </tr>
+            <tr>
+              <td>4</td>	<td>Purwokerto</td>	<td>09.44</td>	<td>09.51</td>
+              <td id= "zoomke49"></td>
+            </tr>
+            <tr>
+              <td>5</td>	<td>Bumiayu</td>	<td>10.33</td>	<td>10.35</td>
+              <td id= "zoomke50"></td>
+            </tr>
+            <tr>
+              <td>6</td>	<td>Ketanggungan</td>	<td>11.16</td>	<td>11.18</td>
+              <td id= "zoomke51"></td>
+            </tr>
+            <tr>
+              <td>7</td>	<td>Cirebon</td>	<td>11.57</td>	<td>12.07</td>
+              <td id= "zoomke52"></td>
+            </tr>
+            <tr>
+              <td>8</td>	<td>Jatibarang</td>	<td>12.39</td>	<td>12.41</td>
+              <td id= "zoomke53"></td>
+            </tr>
+            <tr>
+              <td>9</td>	<td>Haurgeulis</td>	<td>13.13</td>	<td>13.15</td>
+              <td id= "zoomke54"></td>
+            </tr>
+            <tr>
+              <td>10</td>	<td>Jatinegara</td>	<td>14.59</td>	<td>15.01</td>
+              <td id= "zoomke55"></td>
+            </tr>
+            <tr>
+              <td>11</td>	<td>Pasar Senen</td>	<td>15.11</td>	<td>-</td>
+              <td id= "zoomke56"></td>
+            </tr>
+            </table>
+
+            <span class="btn btn-primary btn-sm" onClick="toggle7();">KA Senja Utama YK (147) <i class="fa fa-caret-down"></i></span>
+            <br>
+            <table border="2" id="hidethis7" style="display:none;">
+              <tr>
+                <th>No.</th>
+                <th>Nama Stasiun</th>
+                <th>Tiba</th>
+                <th>Berangkat</th>
+                <th>Zoom</th>
+              </tr>
+           <tr>
+            <td>1</td>	<td>Yogyakarta </td>	<td>-</td>	<td>19.05</td>
+            <td id= "zoomke57"></td>
+           </tr>
+           <tr>
+            <td>2</td>	<td>Wates</td>	<td>19.30</td>	<td>19.33</td>
+            <td id= "zoomke58"></td>
+           </tr>
+           <tr>
+            <td>3</td>	<td>Kutoarjo</td>	<td>20.02</td>	<td>20.10</td>
+            <td id= "zoomke59"></td>
+           </tr>
+           <tr>
+            <td>4</td>	<td>Kebumen </td>	<td>20.35</td>	<td>20.38</td>
+            <td id= "zoomke60"></td>
+           </tr>
+           <tr>
+            <td>5</td>	<td>Gombong</td>	<td>20.56</td>	<td>20.58</td>
+            <td id= "zoomke61"></td>
+           </tr>
+           <tr>
+            <td>6</td>	<td>Purwokerto</td>	<td>21.49</td>	<td>21.57</td>
+            <td id= "zoomke62"></td>
+           </tr>
+           <tr>
+            <td>7</td>	<td>Cirebon</td>	<td>23.50</td>	<td>00.00</td>
+            <td id= "zoomke63"></td>
+           </tr>
+           <tr>
+            <td>8</td>	<td>Bekasi</td>	<td>02.28</td>	<td>02.30</td>
+            <td id= "zoomke64"></td>
+           </tr>
+           <tr>
+            <td>9</td>	<td>Jatinegara</td>	<td>02.49</td>	<td>02.51</td>
+            <td id= "zoomke65"></td>
+           </tr>
+           <tr>
+            <td>10</td>	<td>Pasar Senen</td>	<td>03.01</td>	<td>-</td>
+            <td id= "zoomke66"></td>
+           </tr>
+            </table>
+          <span class="btn btn-primary btn-sm" onClick="toggle8();">KA Progo (307) <i class="fa fa-caret-down"></i></span>
+            <br>
+            <table border="2" id="hidethis8" style="display:none;">
+              <tr>
+                <th>No.</th>
+                <th>Nama Stasiun</th>
+                <th>Tiba</th>
+                <th>Berangkat</th>
+                <th>Zoom</th>
+              </tr>
+            <tr>
+              <td>1</td>	<td>Lempuyangan</td>	<td>-</td>	<td>15.20</td>
+              <td id= "zoomke67"></td>
+            </tr>
+            <tr>
+              <td>2</td>	<td>Wates</td>	<td>15.50</td>	<td>15.52</td>
+              <td id= "zoomke68"></td>
+            </tr>
+            <tr>
+              <td>3</td>	<td>Kutoarjo</td>	<td>16.23</td>	<td>16.26</td>
+              <td id= "zoomke69"></td>
+            </tr>
+            <tr>
+              <td>4</td>	<td>Kebumen </td>	<td>16.50</td>	<td>17.00</td>
+              <td id= "zoomke70"></td>
+            </tr>
+            <tr>
+              <td>5</td>	<td>Karanganyar</td>	<td>17.12</td>	<td>17.18</td>
+              <td id= "zoomke71"></td>
+            </tr>
+            <tr>
+              <td>6</td>	<td>Gombong</td>	<td>17.26</td>	<td>17.30</td>
+              <td id= "zoomke72"></td>
+            </tr>
+            <tr>
+              <td>7</td>	<td>Kroya</td>	<td>17.56</td>	<td>17.59</td>
+              <td id= "zoomke73"></td>
+            </tr>
+            <tr>
+              <td>8</td>	<td>Purwokerto</td>	<td>18.26</td>	<td>18.35</td>
+              <td id= "zoomke74"></td>
+            </tr>
+            <tr>
+              <td>9</td>	<td>Ketanggungan</td>	<td>19.57</td>	<td>19.59</td>
+              <td id= "zoomke75"></td>
+            </tr>
+            <tr>
+              <td>10</td>	<td>Cirebon Prujakan </td>	<td>20.36</td>	<td>20.47</td>
+              <td id= "zoomke76"></td>
+            </tr>
+            <tr>
+              <td>11</td>	<td>Bekasi</td>	<td>23.21</td>	<td>23.23</td>
+              <td id= "zoomke77"></td>
+            </tr>
+            <tr>
+              <td>12</td>	<td>Jatinegara</td>	<td>23.42</td>	<td>23.44</td>
+              <td id= "zoomke78"></td>
+            </tr>
+            <tr>
+              <td>13</td>	<td>Pasar Senen </td>	<td>23.54</td>	<td>-</td>
+              <td id= "zoomke79"></td>
+            </tr>
+            </table>
+            <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+            <h4 style="text-align:center">Jakarta - Yogyakarta</h4>
+
+            <span class="btn btn-primary btn-sm" onClick="toggle9();">KA Taksaka Pagi (84) <i class="fa fa-caret-down"></i></span>
+            <br>
+            <table border="2" id="hidethis9" style="display:none;">
+            <tr>
+              <th>No.</th>
+              <th>Nama Stasiun</th>
+              <th>Tiba</th>
+              <th>Berangkat</th>
+              <th>Zoom</th>
+            </tr>
+            <tr>
+              <td>1</td>	<td>Gambir </td>	<td>-</td>	<td>09.30</td>
+              <td id= "zoomke80"></td>
+            </tr>
+            <tr>
+              <td>2</td>	<td>Cirebon</td>	<td>12.24</td>	<td>12.32</td>
+              <td id= "zoomke81"></td>
+            </tr>
+            <tr>
+              <td>3</td>	<td>Purwokerto</td>	<td>14.28</td>	<td>14.35</td>
+              <td id= "zoomke82"></td>
+            </tr>
+            <tr>
+              <td>4</td>	<td>Kebumen </td>	<td>15.44</td>	<td>15.47</td>
+              <td id= "zoomke83"></td>
+            </tr>
+            <tr>
+              <td>5</td>	<td>Kutoarjo</td>	<td>16.14</td>	<td>16.17</td>
+              <td id= "zoomke84"></td>
+            </tr>
+            <tr>
+              <td>6</td>	<td>Yogyakarta </td>	<td>17.10</td>	<td>-</td>
+              <td id= "zoomke85"></td>
+            </tr>
+            </table>
+          <span class="btn btn-primary btn-sm" onClick="toggle10();">KA Taksaka Malam (86) <i class="fa fa-caret-down"></i></span>
+            <br>
+            <table border="2" id="hidethis10" style="display:none;">
+            <tr>
+              <th>No.</th>
+              <th>Nama Stasiun</th>
+              <th>Tiba</th>
+              <th>Berangkat</th>
+              <th>Zoom</th>
+            </tr>
+            <tr>
+              <td>1</td>	<td>Gambir </td>	<td>-</td>	<td>21.30</td>     
+              <td id= "zoomke86"></td>
+            </tr>
+            <tr>
+              <td>2</td>	<td>Cirebon</td>	<td>00.26</td>	<td>00.33</td>
+              <td id= "zoomke87"></td>
+            </tr>
+            <tr>
+              <td>3</td>	<td>Purwokerto</td>	<td>02.28</td>	<td>02.38</td>
+              <td id= "zoomke88"></td>
+            </tr>
+            <tr>
+              <td>4</td>	<td>Kutoarjo</td>	<td>04.08</td>	<td>04.11</td>
+              <td id= "zoomke89"></td>
+            </tr>
+            <tr>
+              <td>5</td>	<td>Yogyakarta </td>	<td>05.02</td>	<td>-</td>
+              <td id= "zoomke90"></td>
+            </tr>
+            </table>
+
+            <span class="btn btn-primary btn-sm" onClick="toggle11();">Ka Bogowonto (142) <i class="fa fa-caret-down"></i></span>
+            <br>
+            <table border="2" id="hidethis11" style="display:none;">
+            <tr>
+              <th>No.</th>
+              <th>Nama Stasiun</th>
+              <th>Tiba</th>
+              <th>Berangkat</th>
+              <th>Zoom</th>
+            </tr>
+            <tr>
+              <td>1</td>	<td>Pasar Senen</td>	<td>-</td>	<td>21.45</td>             
+              <td id= "zoomke91"></td>
+            </tr>
+            <tr>
+              <td>2</td>	<td>Cirebon Prujakan </td>	<td>00.44</td>	<td>00.51</td>
+              <td id= "zoomke92"></td>
+            </tr>
+            <tr>
+              <td>3</td>	<td>Ciledug</td>	<td>01.14</td>	<td>01.16</td>
+              <td id= "zoomke93"></td>
+            </tr>
+            <tr>
+              <td>4</td>	<td>Purwokerto</td>	<td>02.47</td>	<td>03.01</td>
+              <td id= "zoomke94"></td>
+            </tr>
+            <tr>
+              <td>5</td>	<td>Kroya</td>	<td>03.31</td>	<td>03.34</td>
+              <td id= "zoomke95"></td>
+            </tr>
+            <tr>
+              <td>6</td>	<td>Gombong</td>	<td>03.59</td>	<td>04.08</td>
+              <td id= "zoomke96"></td>
+            </tr>
+            <tr>
+              <td>7</td>	<td>Kebumen </td>	<td>04.28</td>	<td>04.32</td>
+              <td id= "zoomke97"></td>
+            </tr>
+            <tr>
+              <td>8</td>	<td>Kutoarjo</td>	<td>04.56</td>	<td>04.59</td>
+              <td id= "zoomke98"></td>
+            </tr>
+            <tr>
+              <td>9</td>	<td>Jenar</td>	<td>05.12</td>	<td>05.14</td>
+              <td id= "zoomke99"></td>
+            </tr>
+            <tr>
+              <td>10</td>	<td>Wates</td>	<td>05.31</td>	<td>05.33</td>
+              <td id= "zoomke100"></td>
+            </tr>
+            <tr>
+              <td>11</td>	<td>Yogyakarta </td>	<td>06.00</td>	<td>06.03</td>
+              <td id= "zoomke101"></td>
+            </tr>
+            <tr>
+              <td>12</td>	<td>Lempuyangan</td>	<td>06.07</td>	<td>-</td>
+              <td id= "zoomke102"></td>
+            </tr>
+            </table>
+
+           <span class="btn btn-primary btn-sm" onClick="toggle12();">KA Gajahwong (144) <i class="fa fa-caret-down"></i></span>
+            <br>
+            <table border="2" id="hidethis12" style="display:none;">
+            <tr>
+              <th>No.</th>
+              <th>Nama Stasiun</th>
+              <th>Tiba</th>
+              <th>Berangkat</th>
+              <th>Zoom</th>
+            </tr>
+            <tr>
+              <td>1</td>	<td>Pasar Senen</td>	<td>-</td>	<td>06.45</td>            
+              <td id= "zoomke103"></td>
+            </tr>
+            <tr>
+              <td>2</td>	<td>Haurgeulis</td>	<td>08.34</td>	<td>08.36</td>
+              <td id= "zoomke104"></td>
+            </tr>
+            <tr>
+              <td>3</td>	<td>Cirebon</td>	<td>09.38</td>	<td>09.46</td>
+              <td id= "zoomke105"></td>
+            </tr>
+            <tr>
+              <td>4</td>	<td>Ciledug</td>	<td>10.13</td>	<td>10.15</td>
+              <td id= "zoomke106"></td>
+            </tr>
+            <tr>
+              <td>5</td>	<td>Ketanggungan</td>	<td>10.28</td>	<td>10.30</td>
+              <td id= "zoomke107"></td>
+            </tr>
+            <tr>
+              <td>6</td>	<td>Bumiayu</td>	<td>11.09</td>	<td>11.13</td>
+              <td id= "zoomke108"></td>
+            </tr>
+            <tr>
+              <td>7</td>	<td>Purwokerto</td>	<td>11.54</td>	<td>12.02</td>
+              <td id= "zoomke109"></td>
+            </tr>
+            <tr>
+              <td>8</td>	<td>Kroya</td>	<td>12.28</td>	<td>12.33</td>
+              <td id= "zoomke110"></td>
+            </tr>
+            <tr>
+              <td>9</td>	<td>Karanganyar</td>	<td>13.14</td>	<td>13.21</td>
+              <td id= "zoomke111"></td>
+            </tr>
+            <tr>
+              <td>10</td>	<td>Kebumen </td>	<td>13.33</td>	<td>13.35</td>
+              <td id= "zoomke112"></td>
+            </tr>
+            <tr>
+              <td>11</td>	<td>Kutoarjo</td>	<td>14.00</td>	<td>14.03</td>
+              <td id= "zoomke113"></td>
+            </tr>
+            <tr>
+              <td>12</td>	<td>Wates</td>	<td>14.32</td>	<td>14.34</td>
+              <td id= "zoomke114"></td>
+            </tr>
+            <tr>
+              <td>13</td>	<td>Yogyakarta </td>	<td>15.01</td>	<td>15.04</td>
+              <td id= "zoomke115"></td>
+            </tr>
+            <tr>
+              <td>14</td>	<td>Lempuyangan</td>	<td>15.08</td>	<td>-</td>
+              <td id= "zoomke116"></td>
+            </tr>
+            </table>
+
+            <span class="btn btn-primary btn-sm" onClick="toggle13();">Ka Fajar Utama YK (146) <i class="fa fa-caret-down"></i></span>
+            <br>
+            <table border="2" id="hidethis13" style="display:none;">
+            <tr>
+              <th>No.</th>
+              <th>Nama Stasiun</th>
+              <th>Tiba</th>
+              <th>Berangkat</th>
+              <th>Zoom</th>
+            </tr>
+            <tr>
+              <td>1</td>	<td>Pasar Senen</td>	<td>-</td>	<td>07.20</td>
+              <td id= "zoomke117"></td>
+            </tr>
+            <tr>
+              <td>2</td>	<td>Jatibarang</td>	<td>09.42</td>	<td>09.44</td>
+              <td id= "zoomke118"></td>
+            </tr>
+            <tr>
+              <td>3</td>	<td>Cirebon</td>	<td>10.17</td>	<td>10.28</td>
+              <td id= "zoomke119"></td>
+            </tr>
+            <tr>
+              <td>4</td>	<td>Bumiayu</td>	<td>11.45</td>	<td>11.47</td>
+              <td id= "zoomke120"></td>
+            </tr>
+            <tr>
+              <td>5</td>	<td>Purwokerto</td>	<td>12.29</td>	<td>12.40</td>
+              <td id= "zoomke121"></td>
+            </tr>
+            <tr>
+              <td>6</td>	<td>Gombong</td>	<td>13.40</td>	<td>13.42</td>
+              <td id= "zoomke122"></td>
+            </tr>
+            <tr>
+              <td>7</td>	<td>Kebumen </td>	<td>14.01</td>	<td>14.03</td>
+              <td id= "zoomke123"></td>
+            </tr>
+            <tr>
+              <td>8</td>	<td>Kutoarjo</td>	<td>14.28</td>	<td>14.31</td>
+              <td id= "zoomke124"></td>
+            </tr>
+            <tr>
+              <td>9</td>	<td>Wates</td>	<td>15.00</td>	<td>15.02</td>
+              <td id= "zoomke125"></td>
+            </tr>
+            <tr>
+              <td>10</td>	<td>Yogyakarta </td>	<td>15.29</td>	<td>-</td>
+              <td id= "zoomke126"></td>
+            </tr>
+            </table>
+
+            <span class="btn btn-primary btn-sm" onClick="toggle();">KA Senja Utama YK (148) <i class="fa fa-caret-down"></i></span>
+            <br>
+            <table border="2" id="hidethis" style="display:none;">
+            <tr>
+              <th>No.</th>
+              <th>Nama Stasiun</th>
+              <th>Tiba</th>
+              <th>Berangkat</th>
+              <th>Zoom</th>
+            </tr>
+            <tr>
+              <td>1</td>	<td>Pasar Senen</td>	<td>-</td>	<td>18.55</td>           
+                <td id= "zoomke127"></td>
+            </tr>
+            <tr>
+              <td>2</td>	<td>Cirebon</td>	<td>21.47</td>	<td>21.57</td>
+              <td id= "zoomke128"></td>
+            </tr>
+            <tr>
+              <td>3</td>	<td>Purwokerto</td>	<td>23.56</td>	<td>00.04</td>
+              <td id= "zoomke129"></td>
+            </tr>
+            <tr>
+              <td>4</td>	<td>Gombong</td>	<td>00.56</td>	<td>01.02</td>
+              <td id= "zoomke130"></td>
+            </tr>
+            <tr>
+              <td>5</td>	<td>Kebumen </td>	<td>01.30</td>	<td>01.32</td>
+              <td id= "zoomke132"></td>
+            </tr>
+            <tr>
+              <td>6</td>	<td>Prembun</td>	<td>01.46</td>	<td>01.52</td>
+              <td id= "zoomke133"></td>
+            </tr>
+            <tr>
+              <td>7</td>	<td>Kutoarjo</td>	<td>02.04</td>	<td>02.09</td>
+              <td id= "zoomke134"></td>
+            </tr>
+            <tr>
+              <td>8</td>	<td>Wates</td>	<td>02.38</td>	<td>02.40</td>
+              <td id= "zoomke135"></td>
+            </tr>
+            <tr>
+              <td>9</td>	<td>Yogyakarta </td>	<td>03.07</td>	<td>-</td>
+              <td id= "zoomke136"></td>
+            </tr>
+            </table>
+            
+            <span class="btn btn-primary btn-sm" onClick="toggle1();">KA Progo (308) <i class="fa fa-caret-down"></i></span>
+            <br>
+            <table border="2" id="hidethis1" style="display:none;">
+            <tr>
+              <th>No.</th>
+              <th>Nama Stasiun</th>
+              <th>Tiba</th>
+              <th>Berangkat</th>
+              <th>Zoom</th>
+            </tr>
+            <tr>
+              <td>1</td>	<td>Pasar Senen </td>	<td>-</td>	<td>22.30</td>
+              <td id= "zoomke137"></td>
+            </tr>
+            <tr>
+              <td>2</td>	<td>Cirebon Prujakan </td>	<td>01.32</td>	<td>01.50</td>
+              <td id= "zoomke138"></td>
+            </tr>
+            <tr>
+              <td>3</td>	<td>Purwokerto</td>	<td>03.44</td>	<td>03.57</td>
+              <td id= "zoomke139"></td>
+            </tr>
+            <tr>
+              <td>4</td>	<td>Gombong</td>	<td>04.50</td>	<td>04.59</td>
+              <td id= "zoomke140"></td>
+            </tr>
+            <tr>
+              <td>5</td>	<td>Kebumen </td>	<td>05.17</td>	<td>05.19</td>
+              <td id= "zoomke141"></td>
+            </tr>
+            <tr>
+              <td>6</td>	<td>Kutoarjo</td>	<td>05.44</td>	<td>05.47</td>
+              <td id= "zoomke142"></td>
+            </tr>
+            <tr>
+              <td>7</td>	<td>Wates</td>	<td>06.17</td>	<td>06.19</td>
+              <td id= "zoomke143"></td>
+            </tr>
+            <tr>
+              <td>8</td>	<td>Lempuyangan</td>	<td>06.52</td>	<td>-</td>
+              <td id= "zoomke144"></td>
+            </tr>
+            </table>
+			<br>
+			<ul<li>Sumber : GAPEKA 2019</li></ul> <br>
+            <ul<li>Berlaku sejak 1 Desember 2019</li></ul>
+			</div>
+          <div class="leaflet-sidebar-pane" id="tweets">
+            <h1 class="leaflet-sidebar-header">
+              Komplain Keterlambatan
+              <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+            </h1>
+            <span id="findbox"></span>
+            <span id="layercontrol1"></span>
+            <h6 style="text-align:center">Diagram Jumlah Komplain Per Bulan</h6>
+            <div id="chart"></div>
+            <ul<li> Untuk menampilkan komplain setiap bulan pada peta, <br> aktifkan layer dibawah. </li></ul><br>
+            <span id="layercontrol2"></span>
+            <ul<li>Sumber : Twitter</li></ul> <br>
+            <ul<li>Tahun 2019</li></ul>
+          </div>
+		  
+          <div class="leaflet-sidebar-pane" id="legend">
+            <h1 class="leaflet-sidebar-header">Legenda<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+			<br>
+			<ul>
+					<li><i class="fa fa-search" style="font-size:25px"></i> Tab Pencarian Stasiun</li> <br>
+					<li><img src="images/train.png" width='30' alt="loko" title="Loko" class="sb-img"> 	Kereta</li><br>
+					<li><img src="images/st3.png" width='30' alt="stasiun" title="Stasiun" class="sb-img"> 	Stasiun</li><br>
+					<li><img src="images/marker.png" width='20' alt="marker" title="Marker" class="sb-img"> Lokasi Komplain Keterlambatan</li><br>
+					<li><img src="images/area-chart.png" width='30' alt="loko" title="Loko" class="sb-img"> Diagram Ketinggian Jaringan Rel</li><br>
+					<li><img src="images/jalur.png" width='30' alt="loko" title="Loko" class="sb-img"> Rel Kereta Api</li><br>
+        </ul>
+        <ul>
+        <h4>Warna Ikon Kereta Api</h4>
+        <li><img src="images/83.png" width='30' alt="loko" title="Loko" class="sb-img"> 	KA Taksaka (83)</li>
+        <li><img src="images/84.png" width='30' alt="loko" title="Loko" class="sb-img"> 	KA Taksaka (84)</li>
+        <li><img src="images/85.png" width='30' alt="loko" title="Loko" class="sb-img"> 	KA Taksaka (85)</li>
+        <li><img src="images/86.png" width='30' alt="loko" title="Loko" class="sb-img"> 	KA Taksaka (86)</li>
+        <li><img src="images/141.png" width='30' alt="loko" title="Loko" class="sb-img"> 	KA Bogowonto (141)</li>
+        <li><img src="images/142.png" width='30' alt="loko" title="Loko" class="sb-img"> 	KA Bogowonto (142)</li>
+        <li><img src="images/143.png" width='30' alt="loko" title="Loko" class="sb-img"> 	KA Gajahwong (143)</li>
+        <li><img src="images/144.png" width='30' alt="loko" title="Loko" class="sb-img"> 	KA Gajahwong (144)</li>
+        <li><img src="images/145.png" width='30' alt="loko" title="Loko" class="sb-img"> 	KA Fajar Utama YK (145)</li>
+        <li><img src="images/146.png" width='30' alt="loko" title="Loko" class="sb-img"> 	KA Fajar Utama YK (146)</li>
+        <li><img src="images/147.png" width='30' alt="loko" title="Loko" class="sb-img"> 	KA Senja Utama YK (147)</li>
+        <li><img src="images/148.png" width='30' alt="loko" title="Loko" class="sb-img"> 	KA Senja Utama YK (148)</li>
+        <li><img src="images/307.png" width='30' alt="loko" title="Loko" class="sb-img"> 	KA Progo (307)</li>
+        <li><img src="images/308.png" width='30' alt="loko" title="Loko" class="sb-img"> 	KA Progo (308)</li>
+        </ul>
+          </div>
+        </div>
+		</nav>
+      </div>
+	
+	<div id="map"></div>
+	
+    <script src="https://code.jquery.com/jquery-1.11.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+	<script type="text/javascript" src="dist/L.Control.Heightgraph.js"></script>
+	<script type="text/javascript" src="dist/leaflet-search.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>    
+    <script src="https://jdewit.github.io/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.0/leaflet.awesome-markers.js"></script>
+	<script src="https://d3js.org/d3-selection.v1.min.js"></script>
+    <script src="https://d3js.org/d3-array.v2.min.js"></script>
+	<script src="https://d3js.org/d3-color.v1.min.js"></script>
+	<script src="https://d3js.org/d3-drag.v1.min.js"></script>
+	<script src="https://d3js.org/d3-dispatch.v1.min.js"></script>
+	<script src="https://d3js.org/d3-scale.v2.min.js"></script>
+	<script src="https://d3js.org/d3-axis.v1.min.js"></script>
+	<script src="https://d3js.org/d3-format.v1.min.js"></script>
+	<script src="https://d3js.org/d3-shape.v1.min.js"></script>
+	<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+	<script src="https://d3js.org/d3-path.v1.min.js"></script>
+	<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+	<script src="https://d3js.org/d3-collection.v1.min.js"></script>
+    <script src="dist/LeafletPlayback.js"></script>
+	<script src="dist/leaflet.markercluster-src.js"></script>
+	<script src="dist/leaflet-sidebar.js"></script>
+	<script src="dist/easy-button.js"></script>
+    <script src="data/ka.js"></script>
+	<script src="data/jalur.js"></script>
+	<script src="data/tweets.js"></script>
+	<script src="data/tweets1.js"></script>
+	<script src="dist/leaflet.zoomhome.js"></script>
+    <script type="text/javascript" src="data/elevasi.js"></script>
+    <script type="text/javascript" src="data/contoh.js"></script>
+    <script src="example_2_control.js"></script>
+    <script src="example_2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</body>
+<script> 
+
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover({
+        html : true });
+    });
+</script>
+</html>
